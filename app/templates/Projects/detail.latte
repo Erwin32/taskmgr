@@ -1,0 +1,109 @@
+{* Latte template *}
+
+{block content}
+{* nav *}
+<div data-magellan-expedition="fixed">
+  <dl class="sub-nav">
+    <dd data-magellan-arrival="desc"><a href="#desc">Description</a></dd>
+    <dd class="show-for-small-only" data-magellan-arrival="team"><a href="#team">Team</a></dd>
+    <dd data-magellan-arrival="task"><a href="#task">Tasks</a></dd>
+    <dd data-magellan-arrival="comments"><a href="#comments">Comments</a></dd>
+  </dl>
+</div>
+{* content *}
+    <div class="row">
+        <div class="small-12">
+            <h2>Project: {$project['name']}<small><a href="{link action:editProject 'id'=>$id}"> - Edit</a></small></h2>
+            <h3 class="subheader small-offset-1">- owner: {$project['owner']}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 panel">
+            <div class="row">
+                <div class="small-12 medium-7 columns">
+                    <a name="desc"></a>
+                    <h3 class="large-12 small-12 columns" data-magellan-destination="desc">Description</h3>
+                    <div class="large-12 small-12 columns panel">
+                        {$project['description']}
+                    </div>
+                </div>
+                <div class="small-12 medium-4 columns">
+                    <a name="team"></a>
+                    <h3 class="large-12 small-12 columns" data-magellan-destination="team">Team</h3>
+                    <div class="large-12 small-12 columns panel">
+                        <a href="{link :team:detail 'id'=>$project['team_id']}">{$project['team_name']}</a>
+                        {*{foreach $teamMebers as $item}
+                            <div class="row">
+                                <a href="{link :user:detail 'id'=>$item['id']}">{$item['display_name']}</a>
+                            </div>
+                        {/foreach}*}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <a name="task"></a>
+                <h3 class="small-12 columns" data-magellan-destination="task">Tasks</h3>
+                <div class="panel small-12 columns">
+                    {foreach $tasks as $item}
+                        <a name="task-{$item['name']|replace:' ':'-'}"><br></a>
+                       
+                       <br>
+                       <br>
+                        <div class="row">
+                            <h4 class="small-12 columns" style="color: {if $item['urgency_color']!='none'}#{$item['urgency_color']}{/if};">{$item['name']} - {$item['urgency']}<a class="show-for-small-only" href="{link task:edit 'id'=>$item['id']}"> - Edit</a></h4>
+                            <div class="small-12 columns panel">
+                                <div class="small-12 columns panel">
+                                    <h5 class="small-12">Description</h5>
+                                    {$item['description']}
+                                </div>
+                                <div class="medium-4 small-12 columns left panel">
+                                    <h5 class="small-12">Status</h5>
+                                    <span style="color: {if $item['state_color']!='none'}#{$item['state_color']}{/if};">{$item['state']}</span>
+                                </div>
+                                <div class="medium-4 small-12 columns left panel">
+                                    <h5 class="small-12">Assigned</h5>
+                                    <a href="{link :user:detail 'id'=>$item['asigned_id']}">{$item['asigned_name']}</a>
+                                </div>
+                                <div class="medium-4 small-12 columns left panel">
+                                    <h5 class="small-12">Time</h5>
+                                    Estimated: {gmdate("H:i:s", $item['estimated_time'])}<br>
+                                    Real: {gmdate("H:i:s", $item['real_time'])}
+                                </div>
+                                <div class="small-12 columns">
+                                    <a class="button" href="{link task:edit 'id'=>$item['id']}">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <a name="comments"></a>
+        <h3 data-magellan-destination="comments">Comments</h3>
+        <div class="small-12 panel">
+            <div class="small-12">
+                {foreach $comments as $item}
+                    <h6><a href="{link :user:detail 'id'=>$item['user_id']}">{$item['display_name']}</a></h6>    
+                    <div class="panel radius callout">
+                        {$item['text']}
+                    </div>
+                {/foreach}
+            </div>
+            <div class="small-12">
+                {form addComent}
+                    <div class="row">
+                        {label coment /}
+                    </div>
+                    <div class="row">
+                        {input coment}
+                    </div>
+                    <div class="row">
+                        {input send 'class'=>'button'}
+                    </div>
+                {/form}
+            </div>
+        </div>
+    </div>
+{/block}

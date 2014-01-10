@@ -1,0 +1,22 @@
+{* Latte template *}
+
+{block content}
+<div class="row">
+    <div class="small-12">
+        <h2>{$userDetail['display_name']}</h2>
+        <h3 class="subheader small-offset-1">- team: <a href="{link :team:detail 'id'=>$userDetail['team_id']}">{$userDetail['team_name']}</a></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 small-12 columns panel">
+        <div class="medium-6 small-12 columns left ">
+            <h5 class="small-12">Role</h5>
+            <p>{$userDetail['role_name']}</p>
+        </div>
+        <div class="medium-6 small-12 columns left ">
+            <h5 class="small-12">e-mail</h5>
+            <p><a href="mailto:{$userDetail['email']}">{$userDetail['email']}</a></p>
+        </div>
+    </div>
+</div>
+{/block}

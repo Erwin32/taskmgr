@@ -1,0 +1,47 @@
+{* Latte template *}
+
+{block content}
+<div class="row">
+    <div class="small-12 medium-8 medium-centered columns">
+        <h2>Report time</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 medium-centered medium-8 columns panel">
+        {form addTime}
+            <div class="row">
+                {label project /}
+            </div>
+            <div class="row">
+                {input project}
+            </div>
+            <div class="row">
+                <label>Time</label>
+            </div>
+            <div class="row collapse">
+                <div class="small-3 medium-2 columns">
+                    <span class="prefix">Hours</span>
+                </div>
+                <div class="small-3 medium-4 columns">
+                    {input hours}
+                </div>
+                <div class="small-3 medium-2 columns">
+                    <span class="prefix">Minutes</span>
+                </div>
+                <div class="small-3 medium-4 columns">
+                    {input mins}
+                </div>
+            </div>
+            <div class="row">
+                {label coment /}
+            </div>
+            <div class="row">
+                {input coment}
+            </div>
+            <div class="row">
+                {input send 'class'=>'button small-12 large-5'}
+            </div>
+        {/form}
+    </div>
+</div>
+{/block}

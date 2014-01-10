@@ -1,0 +1,129 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <script src="{$basePath}/bower_components/modernizr/modernizr.js"></script>
+	<meta name="description" content="">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+
+	<title>{block title|striptags|upper}Taskmgr{/block}</title>
+
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/stylesheets/app.css">
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	{block head}{/block}
+</head>
+
+<body>
+    <div class="page">
+	<script> document.documentElement.className+=' js' </script>
+
+	
+        <div class="off-canvas-wrap">
+            <div class="inner-wrap">
+              <nav class="tab-bar">
+                {if $user->isLoggedIn()}  
+                <section class="left-small">
+                  <a class="left-off-canvas-toggle menu-icon" ><span>Menu</span></a>
+                </section>
+                {/if}  
+                
+                <section class="middle tab-bar-section">
+                  
+                </section>
+                
+                {*<section class="right-small">
+                  <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+                </section>*}
+              </nav>
+
+              <aside class="left-off-canvas-menu">
+                <ul class="off-canvas-list">
+                  <li><label>Me</label></li>
+                  <li><a href="{link :user:detail 'id'=>$user->id}">Profile</a></li>
+                  {*<li><a href="{link :team:detail 'id'=>$user->Identity->data['teams_id']}">Show my team</a></li>*}
+                  <li><label>Quick Menu</label></li>
+                  <li><a href="{link :action:addTime}">Report time</a></li>
+                  <li><a href="{link :action:addProject}">Add project</a></li>
+                  <li><a href="{link :action:addTask}">Add task</a></li>
+                  <li><label>Not yet implemented</label></li>
+                  
+                  
+                  
+                  <li><a href="#">Show my tasks</a></li>
+                  
+                </ul>
+              </aside>
+
+              {*<aside class="right-off-canvas-menu">
+                <ul class="off-canvas-list">
+                  <li><label>Users</label></li>
+                  <li><a href="#">Hari Seldon</a></li>
+                  ...
+                </ul>
+              </aside>*}
+
+              <section class="main-section">
+                <!-- content goes here -->
+                  
+                  {*top bar*}
+                    <nav class="top-bar" data-topbar>
+                        <ul class="title-area">
+                          <li class="name">
+                              <h1><a href="{link :homepage:dashboard}">TaskMGR</a></h1>
+                          </li>
+                          {if $user->isLoggedIn()}
+                              <li class="toggle-topbar menu-icon"><a href="#"><span>User</span></a></li>
+                          {/if}
+                        </ul>
+
+                        <section class="top-bar-section">
+                          <!-- Right Nav Section -->
+                          <ul class="right">
+                            {if $user->isLoggedIn()}
+                            <li class="has-dropdown">
+                                <a href="#">{$user->identity->data['display_name']}</a>
+                              <ul class="dropdown">
+                                  {if $user->identity->data['role']==1}
+                                      <li><a href="{link :admin:homepage:default}">Admin</a></li>
+                                  {/if}
+                                  <li><a href="#">Settings</a></li>
+                                  <li><a href="{link :sign:out}">Logout</a></li>
+                              </ul>
+                            </li>
+                            {/if}
+                          </ul>
+
+                          <!-- Left Nav Section -->
+                          <ul class="left">
+                            {*<li><a href="#">Left Nav Button</a></li>*}
+                          </ul>
+                        </section>
+                      </nav>
+                  {*end of top bar*}
+                  
+                    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+                  
+                  {include #content}
+              </section>
+
+            <a class="exit-off-canvas"></a>
+
+            </div>
+          </div>
+	</div>
+        
+        <script src="{$basePath}/bower_components/jquery/jquery.js"></script>
+        <script src="{$basePath}/bower_components/foundation/js/foundation.min.js"></script>
+        <script src="{$basePath}/bower_components/foundation/js/foundation/foundation.magellan.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        
+	{block scripts}
+	<script src="{$basePath}/javascripts/vendor/netteForms.js"></script>
+	<script src="{$basePath}/javascripts/main.js"></script>
+	{/block}
+</body>
+</html>

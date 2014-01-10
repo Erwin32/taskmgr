@@ -1,0 +1,6 @@
+{
+  "name": "taskmgr",
+  "dependencies": {
+    "foundation": "~5.0.2"
+  }
+}

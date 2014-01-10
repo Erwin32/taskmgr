@@ -1,0 +1,36 @@
+{* Latte template *}
+
+{block content}
+<div class="row">
+    <div class="small-12 medium-8 medium-centered columns">
+        <h2>Edit Project</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 medium-centered medium-8 columns panel">
+        {form addProject}
+            <div class="row">
+                {label name /}
+            </div>
+            <div class="row">
+                {input name}
+            </div>
+            <div class="row">
+                {label desc /}
+            </div>
+            <div class="row">
+                {input desc}
+            </div>
+            <div class="row">
+                {label owner /}
+            </div>
+            <div class="row">
+                {input owner}
+            </div>
+            <div class="row">
+                {input send 'class'=>'button small-12 large-5'}
+            </div>
+        {/form}
+    </div>
+</div>
+{/block}
